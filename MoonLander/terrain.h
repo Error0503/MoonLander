@@ -5,6 +5,12 @@
 #include <SDL.h>
 
 #include "globals.h"
+#include "debug.h"
+
+typedef struct Point {
+	int value;
+	struct Point* next;
+} Point;
 
 typedef struct Terrain {
 	int n;
@@ -13,7 +19,7 @@ typedef struct Terrain {
 } Terrain;
 
 Terrain* newTerrain(void);
-void AddPoint(Terrain* t, int y);
-void AddPointL(Terrain* t, int y);
+void AddPoint(Terrain* t);
+void AddPointL(Terrain* t);
 
 #endif

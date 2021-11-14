@@ -2,7 +2,7 @@
 
 int Update(Player* player, Terrain* terrain) {
 	int status = 0b0;
-	status = RenderPlayer(player)<<2 | RenderTerrain(terrain)<<1 | RenderHUD(player);
+	status = RenderPlayer(player) << 2 | RenderTerrain(terrain) << 1 | RenderHUD(player);
 	return status;
 }
 
@@ -20,7 +20,7 @@ int RenderTerrain(Terrain* t) {
 	Sint16* x = malloc(((WIDTH / RESOLUTION) + 2) * sizeof(Sint16));
 	Sint16* y = malloc(((WIDTH / RESOLUTION) + 2) * sizeof(Sint16));
 
-	if (x != NULL && y != NULL && 0 <= t->onScreen && t->onScreen <= t->n - (WIDTH / RESOLUTION)) {
+	if (x != NULL && y != NULL && 0 <= t->onScreen && t->onScreen < t->n - (WIDTH / RESOLUTION)) {
 		ClearWindow();
 		x[0] = 0;
 		y[0] = HEIGHT;
@@ -37,10 +37,26 @@ int RenderTerrain(Terrain* t) {
 		filledPolygonRGBA(renderer, x, y, (WIDTH / RESOLUTION) + 2, r, g, b, a);
 		SDL_RenderPresent(renderer);
 		return 0b0;
+	} else if (t->n == 1) {
+		for (int i = 0; i <= WIDTH * 2; i += RESOLUTION) {
+			AddPoint(t);
+		}
+		//RenderTerrain(t);
+		return 0b0;
+	} else if (t->onScreen == t->n - (WIDTH / RESOLUTION)) {
+		AddPoint(t);
+		RenderTerrain(t);
+		return 0b0;
+	} else if (t->onScreen < 0) {
+		AddPointL(t);
+		RenderTerrain(t);
+		if (t->n > 77) {
+			Log("t->n = ", 2);
+			LogInt(t->n);
+			printf("\n");
+		}
+		return 0b0;
 	}
-	free(x);
-	free(y);
-
 	return 0b1;
 }
 

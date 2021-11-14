@@ -33,9 +33,8 @@ void MainMenu(void) {
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				//printf("event.motion.x: %d\nevent.motion.y: %d\nplayButton.x: %d\nplayButton.w: %d\nplayButton.x: %d\nplayButton.h: %d\n", event.motion.x, event.motion.y, playButton.x, playButton.w, playButton.x, playButton.h);
 				if (playButton.x <= event.motion.x && event.motion.x <= playButton.x + playButton.w && playButton.y <= event.motion.y && event.motion.y <= playButton.y + playButton.h) {
-					RunGame();
+					LevelSelect();
 				} else if (settingsButton.x <= event.motion.x && event.motion.x <= settingsButton.x + settingsButton.w && settingsButton.y <= event.motion.y && event.motion.y <= settingsButton.y + settingsButton.h) {
 					nextState = 2;
 				} else if (exitButton.x <= event.motion.x && event.motion.x <= exitButton.x + exitButton.w && exitButton.y <= event.motion.y && event.motion.y <= exitButton.y + exitButton.h) {
@@ -48,6 +47,5 @@ void MainMenu(void) {
 			}
 		}
 	}
-
-	return nextState;
+	return;
 }

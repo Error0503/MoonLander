@@ -2,37 +2,42 @@
 
 void RunGame() {
 	extern SDL_Renderer* renderer;
-	ClearWindow(renderer, BLACK);
 	Terrain* t = newTerrain();
-
-	srand(time(NULL));
-	for (int i = 0; i <= WIDTH * 2; i += RESOLUTION) {
-		AddPoint(t, HEIGHT - (rand() % 100));
-	}
 
 	Player* p = NULL;
 
-	int forward = 1, backward = 0;
-	while (1) {
-		while (forward) {
-			if (Update(p, t) != 0) {
+	int isRunning = 1, forward = 0, backward = 1, i = 0;
+	SDL_Event event;
+	while (isRunning) {
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				exit(0);
+			}
+		}
+		if (forward) {
+			if (i == 50) {
 				backward = 1;
 				forward = 0;
 				t->onScreen--;
+				i = 0;
 			} else {
+				Update(p, t);
 				t->onScreen++;
 				SDL_Delay(150);
 			}
 		}
-		while (backward) {
-			if (Update(p, t) != 0) {
+		if (backward) {
+			if (i == 25) {
 				backward = 0;
 				forward = 1;
 				t->onScreen++;
+				i = 0;
 			} else {
+				Update(p, t);
 				t->onScreen--;
 				SDL_Delay(150);
 			}
 		}
+		i++;
 	}
 }

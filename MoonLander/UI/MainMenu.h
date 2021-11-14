@@ -5,6 +5,7 @@
 #include <SDL2_gfxPrimitives.h>
 
 #include "../graphics.h"
+#include "LevelSelect.h"
 
 void MainMenu(void);
 

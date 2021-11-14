@@ -22,11 +22,12 @@
     <ClInclude Include="UI\MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="graphics.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="MainMenu.c" />
     <ClCompile Include="player.c" />
+    <ClCompile Include="debug.h" />
     <ClCompile Include="terrain.c" />
     <ClCompile Include="UI\LevelSelect.c" />
     <ClCompile Include="UI\MainMenu.c" />
