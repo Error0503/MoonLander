@@ -2,6 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 typedef struct Player {
 	int m, v, a, rotation;

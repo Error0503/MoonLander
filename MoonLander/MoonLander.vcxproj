@@ -11,19 +11,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainMenu.c" />
-    <ClCompile Include="player.c" />
-    <ClCompile Include="terrain.c" />
-    <ClCompile Include="graphics.c" />
-    <ClCompile Include="main.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Prog1\Lab\git\debugmalloc.h" />
     <ClInclude Include="colour.h" />
-    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="terrain.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="UI\LevelSelect.h" />
+    <ClInclude Include="UI\MainMenu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game.c" />
+    <ClCompile Include="graphics.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="MainMenu.c" />
+    <ClCompile Include="player.c" />
+    <ClCompile Include="terrain.c" />
+    <ClCompile Include="UI\LevelSelect.c" />
+    <ClCompile Include="UI\MainMenu.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

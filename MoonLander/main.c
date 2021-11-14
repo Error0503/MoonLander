@@ -1,8 +1,7 @@
-#include "MainMenu.h"
+#include "globals.h"
+#include "UI/MainMenu.h"
 
 SDL_Renderer* renderer;
-int WIDTH = 1200;
-int HEIGHT = 800;
 
 int init(void) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -21,6 +20,7 @@ int init(void) {
 	}
 }
 
+// Write player data to file on exit
 int onExit() {
 	printf("Press Enter to exit!");
 	getchar();
@@ -30,8 +30,25 @@ int main(int argc, char* args[]) {
 
 	init();
 	//atexit(onExit);
-	
+
 	MainMenu();
 
+	/*
+	Terrain* t = newTerrain();
+
+	srand(time(NULL));
+
+	for (int i = RESOLUTION; i < WIDTH; i += RESOLUTION) {
+		AddPointL(t, i, rand() % 10);
+		printf("x: %d\ty: %d\n", t->points[i/RESOLUTION].x, t->points[i/RESOLUTION].y);
+	}
+
+	Player* p = newPlayer("peace.png");
+
+	Update(p, t);
+
+	getchar();
+
+	*/
 	exit(0);
 }

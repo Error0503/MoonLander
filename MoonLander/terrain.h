@@ -4,13 +4,16 @@
 #include <stdlib.h>
 #include <SDL.h>
 
+#include "globals.h"
+
 typedef struct Terrain {
 	int n;
-	SDL_Point* points;
+	int onScreen;
+	int* points;
 } Terrain;
 
 Terrain* newTerrain(void);
-void AddPoint(Terrain* t, int x, int y);
-void AddPointL(Terrain* t, int x, int y);
+void AddPoint(Terrain* t, int y);
+void AddPointL(Terrain* t, int y);
 
 #endif

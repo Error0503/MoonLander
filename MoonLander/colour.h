@@ -8,6 +8,7 @@
 #define BLACK		(Colour){0,		0,		0,		255}
 #define GREY		(Colour){135,	135,	135,	255}
 #define DARK_GREY	(Colour){30,	30,		30,		255}
+#define MOON		(Colour){146,	144,	141,	255};
 
 #define SDL_RED			(SDL_Color){255,	0,		0,		255}
 #define SDL_GREEN		(SDL_Color){0,		255,	0,		255}

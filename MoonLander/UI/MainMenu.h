@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
 
-#include "graphics.h"
+#include "../graphics.h"
 
 void MainMenu(void);
 
