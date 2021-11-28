@@ -54,8 +54,14 @@ DataContainer init() {
 	SDL_RenderClear(dc.renderer);
 
 	// Import the player texture
-	dc.playerTexture = SDL_CreateTextureFromSurface(dc.renderer, IMG_Load("craft.png"));
-	if (dc.playerTexture == NULL) {
+	dc.shipTextureOff = SDL_CreateTextureFromSurface(dc.renderer, IMG_Load("ship_off.png"));
+	if (dc.shipTextureOff == NULL) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load player texture!", NULL);
+		exit(1);
+	}
+
+	dc.shipTextureOn = SDL_CreateTextureFromSurface(dc.renderer, IMG_Load("ship_on.png"));
+	if (dc.shipTextureOn == NULL) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load player texture!", NULL);
 		exit(1);
 	}
@@ -68,7 +74,13 @@ int main(int argc, char* argv) {
 	DataContainer dc;
 	dc = init();
 	GameInitData init = (GameInitData){0};
-	StartGame(&dc, init);
+	Menu(&dc);
 
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "End", "Press ok to quit", NULL);
+
+	fprintf(dc.savefile, "%d", dc.obj.totalTime);
+
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
 }

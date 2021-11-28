@@ -3,6 +3,6 @@
 #include <SDL_ttf.h>
 
 #include "structs.h"
-#include "LevelSelect.h"
+#include "Game.h"
 
-int Menu(DataContainer* dc);
+void Menu(DataContainer* dc);

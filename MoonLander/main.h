@@ -9,6 +9,6 @@
 
 #include "structs.h"
 
-#include "Game.h"
+#include "Menu.h"
 
 #endif

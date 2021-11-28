@@ -4,4 +4,4 @@
 
 #include "structs.h"
 
-int LevelSelect(DataContainer* dc);
+void LevelSelect(DataContainer* dc);
