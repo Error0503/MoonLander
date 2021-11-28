@@ -1,6 +1,6 @@
 #include <SDL.h>
-#include <SDL2_gfxPrimitives.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 
 #include "structs.h"
 #include "Game.h"

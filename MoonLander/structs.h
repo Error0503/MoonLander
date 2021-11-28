@@ -4,12 +4,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-enum Stage { Moon, Mars, Uranus, Earth, Jupiter, Custom };
-
-typedef struct StageRecords {
-	enum Stage stage;
-	long timeinmillis;
-} StageRecords;
+enum Stage { Moon, Mars, Uranus, Earth, Jupiter, Custom } Stage;
 
 typedef struct Object {
 	int x, y;					// The x and y coordinates of the object on the window
@@ -17,6 +12,7 @@ typedef struct Object {
 	double rot;					// The rotation of the object
 	double m;					// The mass of the object
 	int thrust;					// Marks if the thruster is enabled
+	int fuel;					// The ammount of fuel remaining
 	long totalTime;				// Stores the total time elapsed
 } Object;
 
@@ -27,13 +23,16 @@ typedef struct Terrain {
 } Terrain;
 
 typedef struct GameInitData {
+	int stage;
 	double gravity;
 	double thrustPower;
 	int basePlatformChance;
 	int platformWidth;
+	int planetWidth;
 	int heightDiff;
 	int startingFuel;
-	int planetWidth;
+	int fuelBurn;
+	int landerMass;
 } GameInitData;
 
 typedef struct Controls {
@@ -47,10 +46,11 @@ typedef struct DataContainer {
 	SDL_Renderer* renderer;			// SDL_Renderer* for rendering
 	SDL_Texture* shipTextureOff;	// The SDL_Texture* of the player
 	SDL_Texture* shipTextureOn;		// The SDL_Texture* of the player
+	SDL_Texture* background;		// The background texture
+	SDL_Texture* back;				// The back arrow texture
 	Object obj;						// Physics object used for calculating physics and storing game related data
-	GameInitData game;				// COMMENT HERE
-	Controls controls;				// COMMENT HERE
 	TTF_Font* font;
+	long stageRecords[5];
 } DataContainer;
 
 #endif

@@ -3,22 +3,14 @@
 DataContainer init() {
 
 	DataContainer dc = (DataContainer){NULL};
-	dc.controls.up = SDLK_w;
-	dc.controls.down = SDLK_s;
-	dc.controls.left = SDLK_a;
-	dc.controls.right = SDLK_d;
-	dc.controls.exit = SDLK_ESCAPE;
-
-	// Create the player
-
 
 	// Initialize the savefile and if it exists read it's data
 	dc.savefile = fopen("moonlander.sav", "r");
 	if (dc.savefile != NULL) {
-		char buffer[11];
-		size_t red;
-		while ((red = fread(buffer, sizeof(char), 10, dc.savefile) > 0)) {
-			// Read saved leaderboard times...
+		for (int i = 0; i < 5; i++) {
+			char buf[20];
+			fgets(buf, 20, dc.savefile);
+			dc.stageRecords[i] = strtol(buf, NULL, 10);
 		}
 	}
 	dc.savefile = fopen("moonlander.sav", "w");
@@ -36,7 +28,12 @@ DataContainer init() {
 	}
 
 	// Import TTF font for later use
-	dc.font = TTF_OpenFont("consola.ttf", 24);
+	dc.font = TTF_OpenFont("consola.ttf", 35);
+
+	if (dc.font == NULL) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to open font", NULL);
+		exit(1);
+	}
 
 	dc.width = 1440;
 	dc.height = 810;
@@ -66,6 +63,16 @@ DataContainer init() {
 		exit(1);
 	}
 
+	dc.background = SDL_CreateTextureFromSurface(dc.renderer, IMG_Load("background.png"));
+	if (dc.background == NULL) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "Error", "Failed to load background texture!", NULL);
+	}
+
+	dc.back = SDL_CreateTextureFromSurface(dc.renderer, IMG_Load("back.png"));
+	if (dc.back == NULL) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "Error", "Failed to load back texture!", NULL);
+	}
+
 	return dc;
 }
 
@@ -73,12 +80,16 @@ int main(int argc, char* argv) {
 
 	DataContainer dc;
 	dc = init();
-	GameInitData init = (GameInitData){0};
+
 	Menu(&dc);
 
-	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "End", "Press ok to quit", NULL);
+	for (int i = 0; i < 5; i++) {
+		fprintf(dc.savefile, "%d\n", dc.stageRecords[i]);
+	}
 
-	fprintf(dc.savefile, "%d", dc.obj.totalTime);
+	SDL_DestroyTexture(dc.background);
+	SDL_DestroyTexture(dc.shipTextureOff);
+	SDL_DestroyTexture(dc.shipTextureOn);
 
 	TTF_Quit();
 	IMG_Quit();
